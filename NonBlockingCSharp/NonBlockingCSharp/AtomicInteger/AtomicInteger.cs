@@ -23,11 +23,29 @@ namespace NonBlockingCSharp.AtomicInteger
             return i.item;
         }
 
-
-        public int GetAndSet(int ) 
+        /// <summary>
+        /// Sets new value, returns old value
+        /// </summary>
+        /// <param name="newValue">Value to be set</param>
+        /// <returns>Old value</returns>
+        public int GetAndSet(int newValue) 
         {
- 
-        } 
+            int temp = 0;
+            Interlocked.Exchange(ref temp, item);
+            Interlocked.Exchange(ref item, newValue);
+            return temp;
+        }
+
+        /// <summary>
+        /// Compare expected value with actual value, if equal set to the updated value
+        /// </summary>
+        /// <param name="expectedValue"></param>
+        /// <param name="updatedValue"></param>
+        /// <returns>Whether update of new value is successful</returns>
+        public bool CompareAndSet(int expectedValue, int updatedValue) 
+        {
+            return (Interlocked.CompareExchange(ref item, updatedValue, expectedValue) == expectedValue);
+        }
 
         public static int operator --(AtomicInteger i)
         {
