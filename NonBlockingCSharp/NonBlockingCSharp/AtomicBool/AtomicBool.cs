@@ -10,7 +10,10 @@ namespace NonBlockingCSharp.AtomicBool
     [Serializable]
     public class AtomicBool
     {
-        private Boolean item;
+        private static object TrueObject = true;
+        private static object FalseObject = false;
+
+        private object item;
 
         public AtomicBool(bool value) 
         {
@@ -24,34 +27,36 @@ namespace NonBlockingCSharp.AtomicBool
         /// <returns></returns>
         public bool GetAndSet(bool newValue) 
         {
-            bool temp = item;
+            object temp = item;
             item = newValue;
-            return temp;
+            return (bool)temp;
         }
 
         public bool CompareAndSet(bool expectedValue, bool updatedValue) 
         {
-            return (Interlocked.CompareExchange(ref item, updatedValue, expectedValue) == expectedValue);
+            object expectedValueObject = expectedValue;
+            object updatedValueObject = updatedValue;
+            return (Interlocked.CompareExchange(ref item, updatedValueObject, expectedValueObject) == expectedValueObject);
         }
 
         public static bool operator |(AtomicBool atomicBool, bool b)
         {
-            return atomicBool.item || b;
+            return ((bool)atomicBool.item) || b;
         }
 
         public static bool operator &(AtomicBool atomicBool, bool b)
         {
-            return atomicBool.item && b;
+            return ((bool)atomicBool.item) && b;
         }
 
         public static bool operator !(AtomicBool b)
         {
-            return !b.item;
+            return !(bool)b.item;
         }
 
         public static implicit operator bool(AtomicBool b)
         {
-            return b.item;
+            return (bool)b.item;
         } 
     }
 }

@@ -41,6 +41,8 @@
   <ItemGroup>
     <Compile Include="AtomicBool\AtomicBool.cs" />
     <Compile Include="AtomicInteger\AtomicInteger.cs" />
+    <Compile Include="AtomicLong\AtomicLong.cs" />
+    <Compile Include="ConcurrentQueue\ConcurrentQueue.cs" />
     <Compile Include="ConcurrentStack\ConcurrentStack.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\AtomicOperationsUtilities.cs" />
