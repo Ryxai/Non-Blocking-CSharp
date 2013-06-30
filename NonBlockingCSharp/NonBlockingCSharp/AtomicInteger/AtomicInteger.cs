@@ -13,14 +13,9 @@ namespace NonBlockingCSharp.AtomicInteger
     {
         private int item;
 
-        public AtomicInteger(int i)
+        public AtomicInteger(int i = 0)
         {
-            Interlocked.Exchange(ref item, i);
-        }
-
-        public static implicit operator int(AtomicInteger i)
-        {
-            return i.item;
+            item = i;
         }
 
         /// <summary>
@@ -30,9 +25,8 @@ namespace NonBlockingCSharp.AtomicInteger
         /// <returns>Old value</returns>
         public int GetAndSet(int newValue) 
         {
-            int temp = 0;
-            Interlocked.Exchange(ref temp, item);
-            Interlocked.Exchange(ref item, newValue);
+            int temp = item;
+            item = newValue;
             return temp;
         }
 
@@ -45,6 +39,11 @@ namespace NonBlockingCSharp.AtomicInteger
         public bool CompareAndSet(int expectedValue, int updatedValue) 
         {
             return (Interlocked.CompareExchange(ref item, updatedValue, expectedValue) == expectedValue);
+        }
+
+        public static implicit operator int(AtomicInteger i)
+        {
+            return i.item;
         }
 
         public static int operator --(AtomicInteger i)
@@ -62,7 +61,7 @@ namespace NonBlockingCSharp.AtomicInteger
         public static int operator +(AtomicInteger int1, AtomicInteger int2)
         {
             int result = 0;
-            Interlocked.Exchange(ref result, int1.item);
+            result = int1.item;
             Interlocked.Add(ref result, int2.item);
             return result;
         }
@@ -77,7 +76,7 @@ namespace NonBlockingCSharp.AtomicInteger
         public static int operator -(AtomicInteger int1, AtomicInteger int2)
         {
             int result = 0;
-            Interlocked.Exchange(ref result, int1.item);
+            result = int1.item;
             Interlocked.Add(ref result, -(int2.item));
             return result;
         }
@@ -85,7 +84,7 @@ namespace NonBlockingCSharp.AtomicInteger
         public static int operator -(AtomicInteger int1, int int2)
         {
             int result = 0;
-            Interlocked.Exchange(ref result, int1.item);
+            result = int1.item;
             Interlocked.Add(ref result, -int2);
             return result;
         }

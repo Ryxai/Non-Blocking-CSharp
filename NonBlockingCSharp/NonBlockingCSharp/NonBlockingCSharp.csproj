@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AtomicBool\AtomicBool.cs" />
     <Compile Include="AtomicInteger\AtomicInteger.cs" />
     <Compile Include="ConcurrentStack\ConcurrentStack.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
