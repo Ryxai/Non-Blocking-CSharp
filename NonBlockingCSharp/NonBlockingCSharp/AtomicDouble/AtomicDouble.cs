@@ -5,16 +5,16 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace NonBlockingCSharp.AtomicLong
+namespace NonBlockingCSharp.AtomicDouble
 {
     [Serializable]
-    public class AtomicLong
+    public class AtomicDouble
     {
-        private long item;
+        private double item;
 
-        public AtomicLong(long i = 0)
+        public AtomicDouble(double i = 0)
         {
-            Interlocked.Exchange(ref item, i);
+            item = i;
         }
 
         /// <summary>
@@ -22,9 +22,9 @@ namespace NonBlockingCSharp.AtomicLong
         /// </summary>
         /// <param name="newValue">Value to be set</param>
         /// <returns>Old value</returns>
-        public long GetAndSet(long newValue) 
+        public double GetAndSet(double newValue) 
         {
-            long temp = 0;
+            double temp = 0;
             Interlocked.Exchange(ref temp, item);
             Interlocked.Exchange(ref item, newValue);
             return temp;
@@ -36,57 +36,57 @@ namespace NonBlockingCSharp.AtomicLong
         /// <param name="expectedValue"></param>
         /// <param name="updatedValue"></param>
         /// <returns>Whether update of new value is successful</returns>
-        public bool CompareAndSet(long expectedValue, long updatedValue) 
+        public bool CompareAndSet(double expectedValue, double updatedValue) 
         {
             return (Interlocked.CompareExchange(ref item, updatedValue, expectedValue) == expectedValue);
         }
 
-        public static implicit operator long(AtomicLong i)
+        public static implicit operator double(AtomicDouble i)
         {
             return i.item;
         }
 
-        public static AtomicLong operator --(AtomicLong i)
+        public static AtomicDouble operator --(AtomicDouble i)
         {
             Interlocked.Decrement(ref i.item);
             return i;
         }
 
-        public static AtomicLong operator ++(AtomicLong i)
+        public static AtomicDouble operator ++(AtomicDouble i)
         {
             Interlocked.Increment(ref i.item);
             return i;
         }
 
-        public static long operator +(AtomicLong int1, AtomicLong int2)
+        public static double operator +(AtomicDouble d1, AtomicDouble d2)
         {
-            long result = 0;
-            Interlocked.Exchange(ref result, int1.item);
-            Interlocked.Add(ref result, int2.item);
+            double result = 0;
+            result = d1.item;
+            Interlocked.Add(ref result, d2.item);
             return result;
         }
 
-        public static long operator +(AtomicLong int1, long int2)
+        public static double operator +(AtomicDouble d1, double d2)
         {
-            long result = 0;
-            Interlocked.Exchange(ref result, int1.item);
-            Interlocked.Add(ref result, int2);
+            double result = 0;
+            Interlocked.Exchange(ref result, d2.item);
+            Interlocked.Add(ref result, d1.item);
             return result;
         }
 
-        public static long operator -(AtomicLong int1, AtomicLong int2)
+        public static double operator -(AtomicDouble d1, AtomicDouble d2)
         {
-            long result = 0;
-            Interlocked.Exchange(ref result, int1.item);
-            Interlocked.Add(ref result, -(int2.item));
+            double result = 0;
+            Interlocked.Exchange(ref result, d1.item);
+            Interlocked.Add(ref result, -(d2.item));
             return result;
         }
 
-        public static long operator -(AtomicLong int1, long int2)
+        public static double operator -(AtomicDouble d1, double d2)
         {
-            long result = 0;
-            Interlocked.Exchange(ref result, int1.item);
-            Interlocked.Add(ref result, -int2);
+            double result = 0;
+            Interlocked.Exchange(ref result, d1.item);
+            Interlocked.Add(ref result, -d2);
             return result;
         }
     }
