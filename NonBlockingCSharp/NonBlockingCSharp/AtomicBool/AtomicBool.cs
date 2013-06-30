@@ -10,7 +10,7 @@ namespace NonBlockingCSharp.AtomicBool
     [Serializable]
     public class AtomicBool
     {
-        private bool item;
+        private Boolean item;
 
         public AtomicBool(bool value) 
         {
@@ -27,6 +27,11 @@ namespace NonBlockingCSharp.AtomicBool
             bool temp = item;
             item = newValue;
             return temp;
+        }
+
+        public bool CompareAndSet(bool expectedValue, bool updatedValue) 
+        {
+            return (Interlocked.CompareExchange(ref item, updatedValue, expectedValue) == expectedValue);
         }
 
         public static bool operator |(AtomicBool atomicBool, bool b)

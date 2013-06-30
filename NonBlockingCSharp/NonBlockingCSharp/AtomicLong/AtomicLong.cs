@@ -4,16 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using NonBlockingCSharp.Utilities;
 
-namespace NonBlockingCSharp.AtomicInteger
+namespace NonBlockingCSharp.AtomicLong
 {
     [Serializable]
-    public class AtomicInteger
+    public class AtomicLong
     {
-        private int item;
+        private long item;
 
-        public AtomicInteger(int i = 0)
+        public AtomicLong(long i = 0)
         {
             item = i;
         }
@@ -23,9 +22,9 @@ namespace NonBlockingCSharp.AtomicInteger
         /// </summary>
         /// <param name="newValue">Value to be set</param>
         /// <returns>Old value</returns>
-        public int GetAndSet(int newValue) 
+        public long GetAndSet(long newValue) 
         {
-            int temp = item;
+            long temp = item;
             item = newValue;
             return temp;
         }
@@ -36,54 +35,54 @@ namespace NonBlockingCSharp.AtomicInteger
         /// <param name="expectedValue"></param>
         /// <param name="updatedValue"></param>
         /// <returns>Whether update of new value is successful</returns>
-        public bool CompareAndSet(int expectedValue, int updatedValue) 
+        public bool CompareAndSet(long expectedValue, long updatedValue) 
         {
             return (Interlocked.CompareExchange(ref item, updatedValue, expectedValue) == expectedValue);
         }
 
-        public static implicit operator int(AtomicInteger i)
+        public static implicit operator long(AtomicLong i)
         {
             return i.item;
         }
 
-        public static AtomicInteger operator --(AtomicInteger i)
+        public static AtomicLong operator --(AtomicLong i)
         {
             Interlocked.Decrement(ref i.item);
             return i;
         }
 
-        public static AtomicInteger operator ++(AtomicInteger i)
+        public static AtomicLong operator ++(AtomicLong i)
         {
             Interlocked.Increment(ref i.item);
             return i;
         }
 
-        public static int operator +(AtomicInteger int1, AtomicInteger int2)
+        public static long operator +(AtomicLong int1, AtomicLong int2)
         {
-            int result = 0;
+            long result = 0;
             result = int1.item;
             Interlocked.Add(ref result, int2.item);
             return result;
         }
 
-        public static int operator +(AtomicInteger int1, int int2)
+        public static long operator +(AtomicLong int1, long int2)
         {
-            int result = int2;
+            long result = int2;
             Interlocked.Add(ref result, int1.item);
             return result;
         }
 
-        public static int operator -(AtomicInteger int1, AtomicInteger int2)
+        public static long operator -(AtomicLong int1, AtomicLong int2)
         {
-            int result = 0;
+            long result = 0;
             result = int1.item;
             Interlocked.Add(ref result, -(int2.item));
             return result;
         }
 
-        public static int operator -(AtomicInteger int1, int int2)
+        public static long operator -(AtomicLong int1, long int2)
         {
-            int result = 0;
+            long result = 0;
             result = int1.item;
             Interlocked.Add(ref result, -int2);
             return result;
