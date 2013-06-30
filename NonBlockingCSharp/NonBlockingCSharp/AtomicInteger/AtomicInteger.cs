@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using NonBlockingCSharp.Utilities;
 
 namespace NonBlockingCSharp.AtomicInteger
 {
@@ -36,22 +37,33 @@ namespace NonBlockingCSharp.AtomicInteger
 
         public static AtomicInteger operator +(AtomicInteger int1, AtomicInteger int2)
         {
-            throw new NotImplementedException();
+            int result = 0;
+            Interlocked.Exchange(ref result, int1.item);
+            Interlocked.Add(ref result, int2.item);
+            return new AtomicInteger(result);
         }
 
         public static AtomicInteger operator +(AtomicInteger int1, int int2)
         {
-            throw new NotImplementedException();
+            int result = int2;
+            Interlocked.Add(ref result, int1.item);
+            return new AtomicInteger(result);
         }
 
         public static AtomicInteger operator -(AtomicInteger int1, AtomicInteger int2)
         {
-            throw new NotImplementedException();
+            int result = 0;
+            Interlocked.Exchange(ref result, int1.item);
+            Interlocked.Add(ref result, -(int2.item));
+            return new AtomicInteger(result);
         }
 
         public static AtomicInteger operator -(AtomicInteger int1, int int2)
         {
-            throw new NotImplementedException();
+            int result = 0;
+            Interlocked.Exchange(ref result, int1.item);
+            Interlocked.Add(ref result, -int2);
+            return new AtomicInteger(result);
         }
     }
 }
