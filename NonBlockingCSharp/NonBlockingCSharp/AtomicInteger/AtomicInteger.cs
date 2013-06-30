@@ -22,48 +22,54 @@ namespace NonBlockingCSharp.AtomicInteger
         {
             return i.item;
         }
-        
-        public static AtomicInteger operator --(AtomicInteger i)
+
+
+        public int GetAndSet(int ) 
+        {
+ 
+        } 
+
+        public static int operator --(AtomicInteger i)
         {
             Interlocked.Decrement(ref i.item);
-            return i;
+            return i.item;
         }
 
-        public static AtomicInteger operator ++(AtomicInteger i)
+        public static int operator ++(AtomicInteger i)
         {
             Interlocked.Increment(ref i.item);
-            return i;
+            return i.item;
         }
 
-        public static AtomicInteger operator +(AtomicInteger int1, AtomicInteger int2)
+        public static int operator +(AtomicInteger int1, AtomicInteger int2)
         {
             int result = 0;
             Interlocked.Exchange(ref result, int1.item);
             Interlocked.Add(ref result, int2.item);
-            return new AtomicInteger(result);
+            return result;
         }
 
-        public static AtomicInteger operator +(AtomicInteger int1, int int2)
+        public static int operator +(AtomicInteger int1, int int2)
         {
             int result = int2;
             Interlocked.Add(ref result, int1.item);
-            return new AtomicInteger(result);
+            return result;
         }
 
-        public static AtomicInteger operator -(AtomicInteger int1, AtomicInteger int2)
+        public static int operator -(AtomicInteger int1, AtomicInteger int2)
         {
             int result = 0;
             Interlocked.Exchange(ref result, int1.item);
             Interlocked.Add(ref result, -(int2.item));
-            return new AtomicInteger(result);
+            return result;
         }
 
-        public static AtomicInteger operator -(AtomicInteger int1, int int2)
+        public static int operator -(AtomicInteger int1, int int2)
         {
             int result = 0;
             Interlocked.Exchange(ref result, int1.item);
             Interlocked.Add(ref result, -int2);
-            return new AtomicInteger(result);
+            return result;
         }
     }
 }
