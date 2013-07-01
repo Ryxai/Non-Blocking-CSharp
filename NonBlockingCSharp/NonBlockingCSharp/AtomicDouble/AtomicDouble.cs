@@ -61,7 +61,7 @@ namespace NonBlockingCSharp.AtomicDouble
         public static double operator +(AtomicDouble d1, AtomicDouble d2)
         {
             double result = 0;
-            result = d1.item;
+            Interlocked.Exchange(ref result, d1.item);
             Interlocked.Add(ref result, d2.item);
             return result;
         }
@@ -69,7 +69,7 @@ namespace NonBlockingCSharp.AtomicDouble
         public static double operator +(AtomicDouble d1, double d2)
         {
             double result = 0;
-            Interlocked.Exchange(ref result, d2.item);
+            Interlocked.Exchange(ref result, d2);
             Interlocked.Add(ref result, d1.item);
             return result;
         }
