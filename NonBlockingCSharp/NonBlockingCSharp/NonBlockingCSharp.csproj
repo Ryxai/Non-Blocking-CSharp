@@ -42,6 +42,7 @@
     <Compile Include="AtomicBool\AtomicBool.cs" />
     <Compile Include="AtomicCounter\AtomicCounter.cs" />
     <Compile Include="AtomicDouble\AtomicDouble.cs" />
+    <Compile Include="AtomicIntegerFieldUpdater\AtomicIntegerFieldUpdater.cs" />
     <Compile Include="AtomicInteger\AtomicInteger.cs" />
     <Compile Include="AtomicLong\AtomicLong.cs" />
     <Compile Include="AtomicMarkableReference\AtomicMarkableReference.cs" />
