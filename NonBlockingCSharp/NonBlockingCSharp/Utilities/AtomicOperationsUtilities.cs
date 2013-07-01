@@ -13,6 +13,19 @@ namespace NonBlockingCSharp.Utilities
         /// 
         /// </summary>
         /// <typeparam name="T"></typeparam>
+        /// <param name="obj"></param>
+        /// <param name="anotherObject"></param>
+        /// <returns></returns>
+        public static bool Compare<T>(ref T obj, T anotherObject)
+            where T : class
+        {
+            return (Interlocked.CompareExchange(ref obj, anotherObject, anotherObject) == anotherObject);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
         /// <param name="destination"></param>
         /// <param name="currentValue"></param>
         /// <param name="newValue"></param>
