@@ -45,6 +45,11 @@ namespace NonBlockingCSharp.AtomicInteger
         {
             return i.item;
         }
+        
+        public static implicit operator AtomicInteger(int i)
+        {
+            return new AtomicInteger(i);
+        }
 
         public static AtomicInteger operator --(AtomicInteger i)
         {

@@ -45,16 +45,21 @@ namespace NonBlockingCSharp.AtomicDouble
         {
             return i.item;
         }
+        
+        public static implicit operator AtomicDouble(double d)
+        {
+            return new AtomicDouble(d);
+        }
 
         public static AtomicDouble operator --(AtomicDouble i)
         {
-            Interlocked.Decrement(ref i.item);
+            
             return i;
         }
 
         public static AtomicDouble operator ++(AtomicDouble i)
         {
-            Interlocked.Increment(ref i.item);
+            
             return i;
         }
 
@@ -62,7 +67,7 @@ namespace NonBlockingCSharp.AtomicDouble
         {
             double result = 0;
             Interlocked.Exchange(ref result, d1.item);
-            Interlocked.Add(ref result, d2.item);
+            
             return result;
         }
 
@@ -70,7 +75,7 @@ namespace NonBlockingCSharp.AtomicDouble
         {
             double result = 0;
             Interlocked.Exchange(ref result, d2);
-            Interlocked.Add(ref result, d1.item);
+            
             return result;
         }
 
@@ -78,7 +83,7 @@ namespace NonBlockingCSharp.AtomicDouble
         {
             double result = 0;
             Interlocked.Exchange(ref result, d1.item);
-            Interlocked.Add(ref result, -(d2.item));
+            
             return result;
         }
 
@@ -86,7 +91,7 @@ namespace NonBlockingCSharp.AtomicDouble
         {
             double result = 0;
             Interlocked.Exchange(ref result, d1.item);
-            Interlocked.Add(ref result, -d2);
+            
             return result;
         }
     }

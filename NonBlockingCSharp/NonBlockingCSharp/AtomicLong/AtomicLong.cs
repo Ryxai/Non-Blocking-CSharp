@@ -46,6 +46,11 @@ namespace NonBlockingCSharp.AtomicLong
             return i.item;
         }
 
+        public static implicit operator AtomicLong(long l)
+        {
+            return new AtomicLong(l);
+        }
+
         public static AtomicLong operator --(AtomicLong i)
         {
             Interlocked.Decrement(ref i.item);

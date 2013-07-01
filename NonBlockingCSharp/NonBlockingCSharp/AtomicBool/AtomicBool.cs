@@ -17,7 +17,7 @@ namespace NonBlockingCSharp.AtomicBool
 
         public AtomicBool(bool value) 
         {
-            item = value;
+            Interlocked.Exchange(ref item, value);
         }
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace NonBlockingCSharp.AtomicBool
         public bool GetAndSet(bool newValue) 
         {
             object temp = item;
-            item = newValue;
+            Interlocked.Exchange(ref item, newValue);
             return (bool)temp;
         }
 
@@ -52,6 +52,11 @@ namespace NonBlockingCSharp.AtomicBool
         public static bool operator !(AtomicBool b)
         {
             return !(bool)b.item;
+        }
+
+        public static implicit operator AtomicBool(bool b)
+        {
+            return new AtomicBool(b);
         }
 
         public static implicit operator bool(AtomicBool b)
