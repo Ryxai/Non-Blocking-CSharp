@@ -12,7 +12,12 @@ namespace NonBlockingCSharp.ConcurrentSkipList
         where K : class, IComparable<K>
         where V : class
     {
+        private volatile HeadIndex<K, V> head;
 
+        private bool CompareAndSwapHead(HeadIndex<K, V> expectedHead, HeadIndex<K, V> newHead) 
+        { 
+            return (Interlocked.CompareExchange(ref head, newHead, expectedHead) == expectedHead);
+        }
 
         private class Node<K, V>
             where K : class
@@ -50,10 +55,18 @@ namespace NonBlockingCSharp.ConcurrentSkipList
         {
             public readonly K key;
             public readonly Node<K, V> node;
-            public readonly Node<K, V> down;
+            public readonly Index<K, V> down;
             public volatile Index<K, V> right;
 
-            sealed bool CompareAndSwapRight(Index<K, V> expectedValue, Index<K, V> newValue) 
+            public Index(Node<K, V> node, Index<K, V> down, Index<K, V> right)
+            {
+                this.node = node;
+                this.key = node.key;
+                this.down = down;
+                this.right = right;
+            }
+
+            public bool CompareAndSwapRight(Index<K, V> expectedValue, Index<K, V> newValue) 
             {
                 return (Interlocked.CompareExchange(ref right, newValue, expectedValue) == expectedValue);
             }
@@ -62,22 +75,34 @@ namespace NonBlockingCSharp.ConcurrentSkipList
             /// Returns true if the node this indexes has been deleted.
             /// </summary>
             /// <returns></returns>
-            sealed bool IndexesDeletedNode() 
+            public bool IndexesDeletedNode() 
             {
                 return node.value == null;
             }
 
-            sealed bool Link(Index<K, V> succ, Index<K, V> newSucc) 
+            public bool Link(Index<K, V> succ, Index<K, V> newSucc) 
             {
                 Node<K, V> n = node;
                 newSucc.right = succ;
                 return n.value != null && CompareAndSwapRight(succ, newSucc);
             }
 
-            sealed bool Unlink(Index<K, V> succ) 
+            public bool Unlink(Index<K, V> succ) 
             {
                 return !IndexesDeletedNode() && CompareAndSwapRight(succ, succ.right);
             }
         }
+
+        private sealed class HeadIndex<K, V> : Index<K, V>
+        {
+            public readonly int level;
+            public HeadIndex(Node<K, V> node, Index<K, V> down, Index<K, V> right, int level) 
+                : base(node, down, right)            
+            {
+                this.level = level;
+            }
+        }
+
+
     }
 }
