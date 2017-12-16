@@ -42,6 +42,8 @@
     <Compile Include="AtomicBool\AtomicBool.cs" />
     <Compile Include="AtomicCounter\AtomicCounter.cs" />
     <Compile Include="AtomicDouble\AtomicDouble.cs" />
+    <Compile Include="AtomicReferenceArray\AtomicReferenceArray.cs" />
+    <Compile Include="AtomicReference\AtomicReference.cs" />
     <Compile Include="AtomicUpdater\AtomicUpdater.cs" />
     <Compile Include="AtomicInteger\AtomicInteger.cs" />
     <Compile Include="AtomicLong\AtomicLong.cs" />
@@ -52,7 +54,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\AtomicOperationsUtilities.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Test\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
