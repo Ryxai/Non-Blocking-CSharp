@@ -6,7 +6,7 @@ Non-Blocking-CSharp
 - Atomic Integer
 - Atomic Long
 - Atomic Markable Reference
-- Atomic Stamped Reference
-- Concurrent Queue
-- Concurrent Skip List
-- Concurrent Stack
+- Atomic Reference Array
+- Atomic Reference
+- Atomic Integer Array
+- Atomic Long Array
