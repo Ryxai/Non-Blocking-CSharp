@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading;
 using NonBlockingCSharp;
 
-namespace NonBlockingCsharp
+namespace NonBlockingCSharp
 {
     public class AtomicReference<T> where T : class
     {
