@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NonBlockingCSharp.AtomicUpdater
+namespace NonBlockingCSharp
 {
     public abstract class AtomicUpdater<T, V>
         where T : class

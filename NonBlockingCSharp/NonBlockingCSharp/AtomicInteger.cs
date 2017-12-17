@@ -6,7 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using NonBlockingCSharp.Utilities;
 
-namespace NonBlockingCSharp.AtomicInteger
+namespace NonBlockingCSharp
 {
     [Serializable]
     public class AtomicInteger

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace NonBlockingCSharp.AtomicBool
+namespace NonBlockingCSharp
 {
     [Serializable]
     public class AtomicBool
@@ -23,7 +23,7 @@ namespace NonBlockingCSharp.AtomicBool
         /// <summary>
         /// Sets to new value
         /// </summary>
-        /// <param name="newValue"></param>
+        /// <param name="newValue">True or False value</param>
         /// <returns></returns>
         public bool GetAndSet(bool newValue) 
         {

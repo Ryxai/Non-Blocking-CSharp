@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
-using NonBlockingCSharp.Utilities;
+using NonBlockingCSharp;
 
-namespace NonBlockingCsharp.AtomicReference
+namespace NonBlockingCsharp
 {
     public class AtomicReference<T> where T : class
     {

@@ -4,10 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
-using NonBlockingCSharp.AtomicBool;
-using NonBlockingCSharp.Utilities;
 
-namespace NonBlockingCSharp.AtomicMarkableReference
+namespace NonBlockingCSharp
 {
     /// <summary>
     /// This class is modeled after Java's AtomicMarkableReference class
@@ -17,7 +15,7 @@ namespace NonBlockingCSharp.AtomicMarkableReference
         where T : class
     {
         private T item;
-        private AtomicBool.AtomicBool mark;
+        private AtomicBool mark;
 
         public T Reference 
         {

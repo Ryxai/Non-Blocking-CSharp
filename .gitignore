@@ -215,3 +215,5 @@ pip-log.txt
 .mr.developer.cfg
 /NonBlockingCSharp/.vs/NonBlockingCSharp/v15/Server/sqlite3
 /.vs
+/NonBlockingCSharp/.vs/NonBlockingCSharp/lut
+/NonBlockingCSharp/NonBlockingCSharpTest

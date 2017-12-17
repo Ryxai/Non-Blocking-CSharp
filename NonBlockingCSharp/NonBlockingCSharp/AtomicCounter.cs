@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace NonBlockingCSharp.AtomicCounter
+namespace NonBlockingCSharp
 {
     [Serializable]
     public class AtomicCounter

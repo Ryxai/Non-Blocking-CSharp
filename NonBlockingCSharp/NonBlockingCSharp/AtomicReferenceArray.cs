@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
-using NonBlockingCSharp.Utilities;
+using NonBlockingCSharp;
 
-namespace NonBlockingCsharp.AtomicReferenceArray
+namespace NonBlockingCsharp
 {
     class AtomicReferenceArray<T> where T : class
     {

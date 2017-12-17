@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace NonBlockingCSharp.AtomicDouble
+namespace NonBlockingCSharp
 {
     [Serializable]
     public class AtomicDouble
