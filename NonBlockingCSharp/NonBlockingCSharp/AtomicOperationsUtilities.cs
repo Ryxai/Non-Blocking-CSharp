@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Threading;
 
 namespace NonBlockingCSharp
 {
@@ -33,7 +28,7 @@ namespace NonBlockingCSharp
         public static bool  CompareAndSwap<T>(ref T destination, T currentValue, T newValue)
             where T : class
         {
-            return currentValue == Interlocked.CompareExchange<T>(ref destination, newValue, currentValue))
+            return currentValue == Interlocked.CompareExchange<T>(ref destination, newValue, currentValue);
         }
     }
 }

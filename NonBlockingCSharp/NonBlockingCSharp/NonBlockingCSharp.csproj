@@ -45,7 +45,6 @@
     <Compile Include="AtomicIntegerArray.cs" />
     <Compile Include="AtomicReferenceArray.cs" />
     <Compile Include="AtomicReference.cs" />
-    <Compile Include="AtomicReferenceFieldUpdater.cs" />
     <Compile Include="AtomicInteger.cs" />
     <Compile Include="AtomicLong.cs" />
     <Compile Include="AtomicMarkableReference.cs" />
