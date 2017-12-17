@@ -3,7 +3,7 @@ using System.Threading;
 
 namespace NonBlockingCSharp
 {
-    class AtomicLongArray
+    public class AtomicLongArray
     {
 
         private long[] items;

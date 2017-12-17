@@ -3,7 +3,7 @@ using System.Threading;
 
 namespace NonBlockingCSharp
 {
-    class AtomicReferenceArray<T> where T : class
+    public class AtomicReferenceArray<T> where T : class
     {
         private T[] items;
 

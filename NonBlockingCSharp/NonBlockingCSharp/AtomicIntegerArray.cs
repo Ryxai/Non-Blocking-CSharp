@@ -3,7 +3,7 @@ using System.Threading;
 
 namespace NonBlockingCSharp
 {
-    class AtomicIntegerArray
+    public class AtomicIntegerArray
     {
         private int[] items;
 
